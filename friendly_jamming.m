@@ -78,7 +78,7 @@ K    = 10^(K_dB/10);
 P_LOS_SB  = 1/(1 + a*exp(-b*(theta_SB  - a)));
 P_LOS_SE0 = 1/(1 + a*exp(-b*(theta_SE0 - a)));
 
-% NEW (Cách 2): PLoS for jammer links (fixed geometry)
+% NEW (CÃ¡ch 2): PLoS for jammer links (fixed geometry)
 P_LOS_JB  = 1/(1 + a*exp(-b*(theta_JB  - a)));
 P_LOS_JE0 = 1/(1 + a*exp(-b*(theta_JE0 - a)));
 
@@ -123,7 +123,7 @@ for k = 1:numel(Ps)
         isLoS_B  = (rand(1,Nfad) <= P_LOS_SB);
         isLoS_E0 = (rand(1,Nfad) <= P_LOS_SE0);
 
-        % NEW (Cách 2): Shared randomness for J-links (fixed geometry)
+        % NEW (CÃ¡ch 2): Shared randomness for J-links (fixed geometry)
         isLoS_JB  = (rand(1,Nfad) <= P_LOS_JB);
         isLoS_JE0 = (rand(1,Nfad) <= P_LOS_JE0);
 
@@ -138,7 +138,7 @@ for k = 1:numel(Ps)
         L_SB_lin  = 10.^(L_SB_dB/10);
         L_SE0_lin = 10.^(L_SE0_dB/10);
 
-        % NEW (Cách 2): Pathloss J->B, J->E0 (per-sample, Al-Hourani LoS/NLoS)
+        % NEW (CÃ¡ch 2): Pathloss J->B, J->E0 (per-sample, Al-Hourani LoS/NLoS)
         L_JB_dB  = Lfspl_JB_dB  + eta_NLoS_dB*ones(1,Nfad);
         L_JB_dB(isLoS_JB) = Lfspl_JB_dB + eta_LoS_dB;
 
@@ -223,7 +223,7 @@ for k = 1:numel(Ps)
         d_JE_3D = sqrt(r_JE_2D^2 + (zJ - zE)^2);
         theta_JE = atan2(zJ - zE, r_JE_2D) * 180/pi;
 
-        % NEW (Cách 2): PLoS for jammer->E at this position
+        % NEW (CÃ¡ch 2): PLoS for jammer->E at this position
         P_LOS_JE = 1/(1 + a*exp(-b*(theta_JE - a)));
 
         % FSPL for jammer->E at this position
@@ -233,7 +233,7 @@ for k = 1:numel(Ps)
         isLoS_B  = (rand(1,Nfad) <= P_LOS_SB);
         isLoS_E  = (rand(1,Nfad) <= P_LOS_SE);
 
-        % NEW (Cách 2): jammer link states
+        % NEW (CÃ¡ch 2): jammer link states
         isLoS_JB = (rand(1,Nfad) <= P_LOS_JB);
         isLoS_JE = (rand(1,Nfad) <= P_LOS_JE);
 
@@ -248,7 +248,7 @@ for k = 1:numel(Ps)
         L_SB_lin = 10.^(L_SB_dB/10);
         L_SE_lin = 10.^(L_SE_dB/10);
 
-        % NEW (Cách 2): J->B and J->E losses
+        % NEW (CÃ¡ch 2): J->B and J->E losses
         L_JB_dB = Lfspl_JB_dB + eta_NLoS_dB*ones(1,Nfad);
         L_JB_dB(isLoS_JB) = Lfspl_JB_dB + eta_LoS_dB;
 
@@ -360,6 +360,6 @@ ylim([1e-4 1]);
 
 fprintf('\nDone.\n');
 fprintf('- Only URBAN used.\n');
-fprintf('- Cách 2 applied: jammer links J->B and J->E use Al-Hourani LoS/NLoS per-sample (NOT fixed +20dB).\n');
+fprintf('- CÃ¡ch 2 applied: jammer links J->B and J->E use Al-Hourani LoS/NLoS per-sample (NOT fixed +20dB).\n');
 fprintf('- CRN applied: NoJam/Jam share the SAME random samples per (Ps, position, fading), so curves are smoother.\n');
 fprintf('- Plot x-axis is Ps_dB (no sorting), so no kink from re-ordering.\n');
